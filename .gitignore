@@ -1,0 +1,9 @@
+# file types to ignore
+*.pyc
+
+# specific files to ignore, since they are getting built over and over
+app.js
+
+# directories to ignore
+venv/
+node_modules/

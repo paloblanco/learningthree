@@ -1,0 +1,21 @@
+{
+  "name": "test3",
+  "version": "1.0.0",
+  "description": "Threejs is a Jslibrary for drawing 3D visuals on canvas in a browser. It is possible to just grab the three.js file and drop it into your project, but this is a pretty unsustainable way to develop things. If you want to take advantage of multiple JS files with imports, autocomplete in whatever editor you are using, and other useful build tools, it is beneficial to set up a development environment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify js/main.js | uglifyjs -mc > app.js",
+    "dev": "watchify js/main.js -v -o app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browserify": "^16.2.3",
+    "eslint": "^5.10.0",
+    "save-dev": "^2.0.0",
+    "three": "^0.99.0",
+    "uglify-js": "^3.4.9",
+    "watchify": "^3.11.0"
+  }
+}
