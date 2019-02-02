@@ -7,3 +7,4 @@ app.js
 # directories to ignore
 venv/
 node_modules/
+.vscode/
