@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "browserify js/main.js | uglifyjs -mc > app.js",
-    "dev": "watchify js/main.js -v -o app.js"
+    "dev": "watchify js/main.js -v -s -o app.js"
   },
   "author": "",
   "license": "ISC",
