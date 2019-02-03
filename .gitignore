@@ -3,6 +3,8 @@
 
 # specific files to ignore, since they are getting built over and over
 app.js
+package-lock.json
+package.json
 
 # directories to ignore
 venv/
