@@ -1,4 +1,5 @@
-var MINE = require('./learning/firstcube')
+// var MINE = require('./learning/firstcube')
+var MINE = require('./learning/ch1')
 
 MINE()
 
