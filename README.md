@@ -57,38 +57,40 @@ You are pretty much ready to go at this point. Create a index.html file to conta
 
 You can also use a templater or something fancier to hold your app.
 The following "hello world" of threejs can be pasted into main.js. Try running "npm run dev" to set up the watcher, paste the text below, save main.js, then open index.html.
-var THREE = require('three')
 
-var scene = new THREE.Scene();
 
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    var THREE = require('three')
 
-var renderer = new THREE.WebGLRenderer();
+    var scene = new THREE.Scene();
 
-renderer.setSize( window.innerWidth, window.innerHeight );
+    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-document.body.appendChild( renderer.domElement );
+    var renderer = new THREE.WebGLRenderer();
 
-var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+    renderer.setSize( window.innerWidth, window.innerHeight );
 
-var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    document.body.appendChild( renderer.domElement );
 
-var cube = new THREE.Mesh( geometry, material );
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 
-scene.add( cube );
+    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 
-camera.position.z = 5;
+    var cube = new THREE.Mesh( geometry, material );
 
-function animate() {
+    scene.add( cube );
 
-requestAnimationFrame( animate );
+    camera.position.z = 5;
 
-cube.rotation.x += 0.01;
+    function animate() {
 
-cube.rotation.y += 0.01;
+    requestAnimationFrame( animate );
 
-    renderer.render( scene, camera );
+    cube.rotation.x += 0.01;
 
-}
+    cube.rotation.y += 0.01;
 
-animate();
+        renderer.render( scene, camera );
+
+    }
+
+    animate();
