@@ -8,7 +8,7 @@ I am using this repo to track my progress as I learn about threejs. I am using a
 
 I am mostly interested in threejs for two things.
 
-1. I would like to make 3d figures and plots to accompany reporting that I build in my day job as a data scientist. I have above-average competency but my javascript is rather poor. I have found python's 3d capabilities to be lacking.
+1. I would like to make 3d figures and plots to accompany reporting that I build in my day job as a data scientist. I have above-average competency in pyhton but my javascript is rather poor. I have found python's 3d capabilities to be lacking.
 2. I also make video games! Most of them are maintained on [gamejolt](https://gamejolt.com/@paloblancogames). I really enjoy the coding aspect of games, so I am slowly moving away from dedicated game engines and into pure javascript. I frequently post about my games on twitter if you are interested: [https://twitter.com/paloblancogames]
 
 ## Goal of this repo
