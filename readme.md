@@ -1,5 +1,8 @@
 # Learning how to use threejs
 
+## Summary
+This is a repo where I am following along with Lewy Blue's online book, [https://discoverthreejs.com/]. I am making changes so I can develop on my own machine (using VScode) and I can bundle my application using Parcel. The directions below can help you to set up your own development environment for making threejs apps and games!
+
 ## Background
 I am using this repo to track my progress as I learn about threejs. I am using an excellent guide written about threejs by Lewy Blue which can be found here: [https://discoverthreejs.com/]
 
