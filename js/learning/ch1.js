@@ -1,4 +1,5 @@
 var THREE = require('three')
+// import THREE from 'three';
 
 // these need to be accessed inside more than one function so we'll declare them first
 let container;
@@ -38,15 +39,28 @@ function init() {
 
     // create a purple Basic material
     const material = new THREE.MeshStandardMaterial( { color: 0x800080 } );
+    const material2 = new THREE.MeshBasicMaterial( { color: 0x800080 } );
 
     // create a Mesh containing the geometry and material
     mesh = new THREE.Mesh( geometry, material );
+    mesh2 = new THREE.Mesh( geometry, material2 );
 
     // add the mesh to the scene
     scene.add( mesh );
+    scene.add( mesh2 );
+    mesh2.position.set(3,0,0);
+
+    //add a light to the scene
+    const light = new THREE.DirectionalLight(0xffffff, 5.0);
+
+    //move the light, since its default position is 000
+    light.position.set(0,3,3);
+
+    //add the light to the scene
+    scene.add(light);
 
     // create a renderer
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({antialias: true});
 
     renderer.setSize( container.clientWidth, container.clientHeight );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -59,6 +73,15 @@ animate = function() {
     // call animate recursively
     requestAnimationFrame( animate );
 
+    // animate our cube a little bit
+    mesh.rotation.z += 0.01;
+    mesh.rotation.y += 0.01;
+    mesh.rotation.x += 0.01;
+
+    mesh2.rotation.z += 0.01;
+    mesh2.rotation.y += 0.01;
+    mesh2.rotation.x += 0.01;
+
     // render, or 'create a still image', of the scene
     // this will create one still image / frame each time the animate
     // function calls itself
@@ -67,7 +90,7 @@ animate = function() {
 
 init();
 
-module.exports = animate
+module.exports = animate;
 
 
 
