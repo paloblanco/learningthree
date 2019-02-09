@@ -69,10 +69,7 @@ function init() {
     container.appendChild( renderer.domElement );
 }
 
-animate = function() {
-    // call animate recursively
-    requestAnimationFrame( animate );
-
+function update() {
     // animate our cube a little bit
     mesh.rotation.z += 0.01;
     mesh.rotation.y += 0.01;
@@ -81,16 +78,42 @@ animate = function() {
     mesh2.rotation.z += 0.01;
     mesh2.rotation.y += 0.01;
     mesh2.rotation.x += 0.01;
+}
 
-    // render, or 'create a still image', of the scene
-    // this will create one still image / frame each time the animate
-    // function calls itself
+function render() {
     renderer.render( scene, camera );
+}
+
+// handle window resizing
+function onWindowResize() {
+    
+    // set the aspect ratio to match the new browser window aspect ratio
+    camera.aspect = container.clientWidth / container.clientHeight;
+
+
+    // update the camera's frustum
+    camera.updateProjectionMatrix();
+
+    // update the size of the renderer AND the canvas
+    renderer.setSize( container.clientWidth, container.clientHeight );
+  
+    }
+
+  
+window.addEventListener( 'resize', onWindowResize );
+
+
+// this is our play button - it will make the app go!
+play = function() {
+    renderer.setAnimationLoop( () => {
+        update();
+        render();
+    }) 
 }
 
 init();
 
-module.exports = animate;
+module.exports = play;
 
 
 
