@@ -1,4 +1,5 @@
 var THREE = require('three')
+var uv_test = require('~/textures/uv_test_bw.png')
 // import THREE from 'three';
 
 // these need to be accessed inside more than one function so we'll declare them first
@@ -37,8 +38,13 @@ function init() {
     // create a geometry
     const geometry = new THREE.BoxBufferGeometry( 2, 2, 2 );
 
+    // create our texture loader
+    const textureLoader = new THREE.TextureLoader();
+    texture = textureLoader.load(uv_test);
+    texture.anisotropy = 16;
+
     // create a purple Basic material
-    const material = new THREE.MeshStandardMaterial( { color: 0x800080 } );
+    const material = new THREE.MeshStandardMaterial( { map: texture } );
     const material2 = new THREE.MeshBasicMaterial( { color: 0x800080 } );
 
     // create a Mesh containing the geometry and material
@@ -51,7 +57,7 @@ function init() {
     mesh2.position.set(3,0,0);
 
     //add a light to the scene
-    const light = new THREE.DirectionalLight(0xffffff, 5.0);
+    const light = new THREE.DirectionalLight(0xffffff, 3.0);
 
     //move the light, since its default position is 000
     light.position.set(0,3,3);
