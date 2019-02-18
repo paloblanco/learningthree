@@ -10,31 +10,43 @@ let scene;
 let mesh;
 
 function init() {
-    // Get a reference to the container element that will hold our scene
+    
     container = document.querySelector( '#container' );
-    // container = document.querySelector( '#container' );
-
-    // create a Scene
+    
     scene = new THREE.Scene();
-    // set the background color
     scene.background = new THREE.Color("skyblue");
 
-    //make the camera
-    // Create a Camera
+    initCamera();
+    initLights();
+    initMeshes();
+    initRenderer();
+
+}
+
+function initCamera() {
     const fov = 35; // AKA Field of View
     const aspect = container.clientWidth / container.clientHeight;
     const near = 0.1; // the near clipping plane
     const far = 100; // the far clipping plane
     camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
 
-    // every object is initially created at ( 0, 0, 0 )
-    // we'll move the camera back a bit so that we can view the scene
     camera.position.set( 0, 0, 10 );
-    // the above line is equivalent to doing the following:
-    // camera.position.x = 0;
-    // camera.position.y = 0;
-    // camera.position.z = 10;
+}
 
+function initLights() {
+    //add a light to the scene
+    const light = new THREE.DirectionalLight(0xffffff, 3.0);
+    const ambLight = new THREE.AmbientLight(0xffffff, 0.5);
+
+    //move the light, since its default position is 000
+    light.position.set(0,3,3);
+
+    //add the light to the scene
+    scene.add(light);
+    scene.add(ambLight);
+}
+
+function initMeshes() {
     // create a geometry
     const geometry = new THREE.BoxBufferGeometry( 2, 2, 2 );
 
@@ -56,15 +68,9 @@ function init() {
     scene.add( mesh2 );
     mesh2.position.set(3,0,0);
 
-    //add a light to the scene
-    const light = new THREE.DirectionalLight(0xffffff, 3.0);
+}
 
-    //move the light, since its default position is 000
-    light.position.set(0,3,3);
-
-    //add the light to the scene
-    scene.add(light);
-
+function initRenderer() {
     // create a renderer
     renderer = new THREE.WebGLRenderer({antialias: true});
 
@@ -73,6 +79,7 @@ function init() {
 
     // add the automatically created <canvas> element to the page
     container.appendChild( renderer.domElement );
+
 }
 
 function update() {
@@ -84,10 +91,13 @@ function update() {
     mesh2.rotation.z += 0.01;
     mesh2.rotation.y += 0.01;
     mesh2.rotation.x += 0.01;
+
 }
 
 function render() {
+    
     renderer.render( scene, camera );
+    
 }
 
 // handle window resizing
@@ -120,6 +130,3 @@ play = function() {
 init();
 
 module.exports = play;
-
-
-
