@@ -1,10 +1,12 @@
 var THREE = require('three')
+var OrbitControls = require('~/js/external/OrbitControls.js')
 var uv_test = require('~/textures/uv_test_bw.png')
-// import THREE from 'three';
+
 
 // these need to be accessed inside more than one function so we'll declare them first
 let container;
 let camera;
+let controls;
 let renderer;
 let scene;
 let mesh;
@@ -17,6 +19,7 @@ function init() {
     scene.background = new THREE.Color("skyblue");
 
     initCamera();
+    initControls();
     initLights();
     initMeshes();
     initRenderer();
@@ -30,20 +33,27 @@ function initCamera() {
     const far = 100; // the far clipping plane
     camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
 
-    camera.position.set( 0, 0, 10 );
+    camera.position.set( -4, 4, 10 );
+}
+
+function initControls() {
+    controls = new OrbitControls( camera, container );
 }
 
 function initLights() {
     //add a light to the scene
-    const light = new THREE.DirectionalLight(0xffffff, 3.0);
-    const ambLight = new THREE.AmbientLight(0xffffff, 0.5);
+    const frontLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    const backLight = new THREE.DirectionalLight(0xffffff, 1.0);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
 
     //move the light, since its default position is 000
-    light.position.set(0,3,3);
+    frontLight.position.set(10,10,10);
+    backLight.position.set(-10,10,-10);
 
     //add the light to the scene
-    scene.add(light);
-    scene.add(ambLight);
+    scene.add(frontLight);
+    scene.add(backLight);
+    scene.add(ambientLight);
 }
 
 function initMeshes() {
@@ -65,8 +75,8 @@ function initMeshes() {
 
     // add the mesh to the scene
     scene.add( mesh );
-    scene.add( mesh2 );
-    mesh2.position.set(3,0,0);
+    // scene.add( mesh2 );
+    // mesh2.position.set(3,0,0);
 
 }
 
@@ -84,20 +94,20 @@ function initRenderer() {
 
 function update() {
     // animate our cube a little bit
-    mesh.rotation.z += 0.01;
-    mesh.rotation.y += 0.01;
-    mesh.rotation.x += 0.01;
+    // mesh.rotation.z += 0.01;
+    // mesh.rotation.y += 0.01;
+    // mesh.rotation.x += 0.01;
 
-    mesh2.rotation.z += 0.01;
-    mesh2.rotation.y += 0.01;
-    mesh2.rotation.x += 0.01;
+    // mesh2.rotation.z += 0.01;
+    // mesh2.rotation.y += 0.01;
+    // mesh2.rotation.x += 0.01;
 
 }
 
 function render() {
     
     renderer.render( scene, camera );
-    
+
 }
 
 // handle window resizing
