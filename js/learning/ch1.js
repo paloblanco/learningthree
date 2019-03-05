@@ -1,7 +1,8 @@
 var THREE = require('three')
 var OrbitControls = require('~/js/external/OrbitControls.js')
 var uv_test = require('~/textures/uv_test_bw.png')
-
+var parrot = require('~/models/Parrot.glb')
+var GLTFLoader = require('~/js/external/GLTFLoader.js')
 
 // these need to be accessed inside more than one function so we'll declare them first
 let container;
@@ -10,6 +11,9 @@ let controls;
 let renderer;
 let scene;
 let mesh;
+
+const mixers = [];
+const clock = new THREE.Clock();
 
 function init() {
     
@@ -21,7 +25,8 @@ function init() {
     initCamera();
     initControls();
     initLights();
-    initMeshes();
+    // initMeshes();
+    loadModels();
     initRenderer();
 
 }
@@ -33,7 +38,7 @@ function initCamera() {
     const far = 100; // the far clipping plane
     camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
 
-    camera.position.set( -5, 5, 7 );
+    camera.position.set( -1.5, 1.5, 6.5 );
 }
 
 function initControls() {
@@ -54,6 +59,44 @@ function initLights() {
     scene.add(frontLight);
     scene.add(backLight);
     scene.add(ambientLight);
+}
+
+function loadModels() {
+    
+    const loader = new GLTFLoader();
+
+    const onLoad = ( gltf, position ) => {
+
+        const model = gltf.scene.children[ 0 ];
+        model.scale.set(0.1,0.1,0.1);
+
+        const animation = gltf.animations[ 0 ];
+
+        const mixer = new THREE.AnimationMixer( model );
+        mixers.push( mixer );
+        const action = mixer.clipAction( animation );
+        action.play();
+
+        model.position.copy( position );
+        scene.add( model );
+
+    };
+    // the loader will report the loading progress to this function
+    const onProgress = () => {};
+
+    // the loader will send any error messages to this function, and we'll log
+    // them to to console
+    const onError = ( errorMessage ) => { console.log( errorMessage ); };
+
+    const parrotPosition = new THREE.Vector3( 0, 0, 2.5 );
+    loader.load( parrot, gltf => onLoad( gltf, parrotPosition ), onProgress, onError );
+
+    const flamingoPosition = new THREE.Vector3( 7.5, 0, -10 );
+    loader.load( parrot, gltf => onLoad( gltf, flamingoPosition ), onProgress, onError );
+
+    const storkPosition = new THREE.Vector3( 0, -2.5, -10 );
+    loader.load( parrot, gltf => onLoad( gltf, storkPosition ), onProgress, onError );
+
 }
 
 function initMeshes() {
@@ -158,6 +201,9 @@ function update() {
     // mesh2.rotation.z += 0.01;
     // mesh2.rotation.y += 0.01;
     // mesh2.rotation.x += 0.01;
+    const delta = clock.getDelta();
+
+    mixers.forEach( ( mixer ) => { mixer.update( delta ); } );
 
 }
 
