@@ -6,7 +6,7 @@
  * @author Don McCurdy / https://www.donmccurdy.com
  */
 
-var THREE = require('three');
+import * as THREE from "three";
 
 THREE.GLTFLoader = ( function () {
 
@@ -3400,4 +3400,4 @@ THREE.GLTFLoader = ( function () {
 
 } )();
 
-module.exports = THREE.GLTFLoader;
+export default THREE.GLTFLoader;

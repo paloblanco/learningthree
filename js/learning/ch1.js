@@ -1,8 +1,10 @@
-var THREE = require('three')
-var OrbitControls = require('~/js/external/OrbitControls.js')
-var uv_test = require('~/textures/uv_test_bw.png')
-var parrot = require('~/models/Parrot.glb')
-var GLTFLoader = require('~/js/external/GLTFLoader.js')
+// var THREE = require('three')
+import * as THREE from 'three';
+
+import OrbitControls  from '~/js/external/OrbitControls.js';
+import uv_test  from '~/textures/uv_test_bw.png';
+import parrot from '~/models/Parrot.glb';
+import GLTFLoader from '~/js/external/GLTFLoader.js';
 
 // these need to be accessed inside more than one function so we'll declare them first
 let container;
@@ -233,7 +235,7 @@ window.addEventListener( 'resize', onWindowResize );
 
 
 // this is our play button - it will make the app go!
-play = function() {
+const play = function() {
     renderer.setAnimationLoop( () => {
         update();
         render();
@@ -242,4 +244,4 @@ play = function() {
 
 init();
 
-module.exports = play;
+export default play;
