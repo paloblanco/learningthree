@@ -1,4 +1,3 @@
-// var THREE = require('three')
 import * as THREE from 'three';
 
 import OrbitControls  from '~/js/external/OrbitControls.js';
